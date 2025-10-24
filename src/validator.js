@@ -3,7 +3,7 @@ export const validateBoolean = (value) => {
   if (value === "true") return true
   else if (value === "false") return false
 
-  throw new Error(`should be a boolean!`)
+  throw new Error(`should be a boolean! Got: ${value} (${typeof value})`)
 }
 
 export const validateString = (value) => {
