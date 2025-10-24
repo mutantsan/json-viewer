@@ -105,6 +105,14 @@ const Toolbar = function ({ expanded, indent, onChange, onSearch, showDetails })
   }
   searchWrapper.appendChild(searchInput)
 
+  const resetIcon = document.createElement("span")
+  resetIcon.className = "icon reset clickable"
+  resetIcon.onclick = () => {
+    if (searchInput) searchInput.value = ""
+    onSearch("")
+  }
+  searchWrapper.appendChild(resetIcon)
+
   this.refresh = () => {
     this.expanded = 1
     this.indent = 2

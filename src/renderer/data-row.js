@@ -125,9 +125,19 @@ const DataRow = function ({ key, value, expanded, indent, onToggleExpand, level 
 
     const valueWrapper = document.createElement("span")
     valueWrapper.className = `value ${thisDataType.toLowerCase()}`
-    valueEl = document.createElement("span")
-    valueEl.className = "value-data"
-    valueEl.textContent = thisDataType === "string" ? `"${value}"` : value
+
+    if (typeof value === "string" && (value.startsWith("http://") || value.startsWith("https://"))) {
+      valueEl = document.createElement("a")
+      valueEl.className = "value-data link"
+      valueEl.href = value
+      valueEl.target = "_blank"
+      valueEl.rel = "noopener noreferrer"
+    } else {
+      valueEl = document.createElement("span")
+      valueEl.className = "value-data"
+    }
+
+    valueEl.textContent = thisDataType === "string" ? `"${value}"` : `${value === "null" ? "null" : value}`
     if (valueType) valueWrapper.appendChild(valueType)
     valueWrapper.appendChild(valueEl)
     keyValueWrapper.appendChild(valueWrapper)
