@@ -5,6 +5,7 @@ import postcss from "postcss"
 import postcssMinify from "postcss-minify"
 import fs from "fs"
 
+const forkText = fs.readFileSync("fork_info.md", "utf-8")
 const licenseText = fs.readFileSync("LICENSE.md", "utf-8")
 
 // helpers for console log
@@ -59,6 +60,11 @@ const options = {
   plugins: [cssPlugin],
   banner: {
     js: `
+/*
+${forkText}
+---------------------------------------
+*/
+
 /*
 ${licenseText}
 */
